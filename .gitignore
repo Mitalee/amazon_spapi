@@ -1,0 +1,6 @@
+senv/
+untitled.txt
+__pycache__
+*.pyc
+.env
+*__pycache__*
