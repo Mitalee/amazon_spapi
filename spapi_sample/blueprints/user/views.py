@@ -124,7 +124,7 @@ def authorize_amazon_spapi():
     ## 1. Prepare the authorization URL, which will ping the callback URL with the authorization code.
     # authorization_redirect_url = authorize_url + '?response_type=code&client_id=' + client_id + '&redirect_uri=' + callback_uri + '&scope='+scope
     # authorization_redirect_url = authorize_url + '?application\_id='+ app_id+'&state=stateexample&version=beta'
-    authorization_redirect_url = 'https://sellercentral.amazon.in/apps/authorize/consent?application_id=amzn1.sellerapps.app.9c4ddbe1-87e7-4660-b6c2-d0e977e51206&state=stateexample&version=beta'
+    authorization_redirect_url = 'https://sellercentral.amazon.in/apps/authorize/consent?application_id='+app_id+'&state=stateexample&version=beta'
     print ("AUTH REDIRECT URL IS:  " + authorization_redirect_url)
     
     return redirect(authorization_redirect_url)
@@ -145,15 +145,15 @@ def callback_amazon_spapi():
     print("mws_auth_token: ", mws_auth_token)
     print("selling_partner_id: ", selling_partner_id)
 
-    # client_id = current_app.config.get('SPAPI_CLIENT_ID')
-    # client_secret = current_app.config.get('SPAPI_CLIENT_SECRET')
+    client_id = current_app.config.get('SPAPI_CLIENT_ID')
+    client_secret = current_app.config.get('SPAPI_CLIENT_SECRET')
     # token_url = current_app.config.get('SPAPI_TOKEN_URI')
     # user_info_url = current_app.config.get('GOOGLE_USER_INFO')
     ## 4. Prepare the token URL, pass the authorization code and request for the access_token
     data = {'grant_type': 'authorization_code', 
             'code': code, 
-            'client_id': 'amzn1.application-oa2-client.fb1025413df44644851e79a0d1ae09a2',
-            'client_secret': '52340a5c1a098461c5c291e67ae37fe610809f8d3e1aab1bddbb8da56a34ad23'
+            'client_id': client_id,
+            'client_secret': client_secret
             }#current_app.config.get('SPAPI_CLIENT_SECRET'),}
 
     # data = 'grant_type=authorization_code&code=RHnhjkSdzjdCoZmqVgVc&client_id=amzn1.application-oa2-client.fb1025413df44644851e79a0d1ae09a2&client_secret=52340a5c1a098461c5c291e67ae37fe610809f8d3e1aab1bddbb8da56a34ad23'
